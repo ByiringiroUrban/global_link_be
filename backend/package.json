@@ -7,11 +7,11 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:push": "prisma db push",
+    "db:generate": "tsx scripts/prisma.ts generate",
+    "db:migrate": "tsx scripts/prisma.ts migrate dev",
+    "db:push": "tsx scripts/prisma.ts db push",
     "db:seed": "tsx prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "tsx scripts/prisma.ts studio"
   },
   "keywords": ["ecommerce", "warehouse", "global-link", "ai"],
   "license": "MIT",

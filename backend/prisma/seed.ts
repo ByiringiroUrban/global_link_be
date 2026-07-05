@@ -1,5 +1,10 @@
+import path from 'path';
+import dotenv from 'dotenv';
 import { PrismaClient, Role } from '@prisma/client';
 import { hashPassword } from '../src/utils/password';
+
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const prisma = new PrismaClient();
 
@@ -7,7 +12,7 @@ async function main() {
   console.log('Seeding database...');
 
   const adminPassword = await hashPassword('Admin123!');
-  const admin = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: 'admin@globallink.com' },
     update: {},
     create: {
@@ -45,7 +50,7 @@ async function main() {
   });
 
   const userPassword = await hashPassword('User123!');
-  const user = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: 'user@globallink.com' },
     update: {},
     create: {
@@ -161,9 +166,9 @@ async function main() {
   }
 
   console.log('Seed completed:');
-  console.log(`  Admin:    admin@globallink.com / Admin123!`);
-  console.log(`  Supplier: supplier@globallink.com / Supplier123!`);
-  console.log(`  User:     user@globallink.com / User123!`);
+  console.log('  Admin:    admin@globallink.com / Admin123!');
+  console.log('  Supplier: supplier@globallink.com / Supplier123!');
+  console.log('  User:     user@globallink.com / User123!');
   console.log(`  Created ${sampleProducts.length} sample products`);
 }
 
